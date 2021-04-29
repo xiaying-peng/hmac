@@ -127,6 +127,8 @@ class Ey::Hmac::Adapter
     calculated_signatures = accept_digests.map { |ad| signature(key_secret, ad) }
     matching_signature = calculated_signatures.any? { |cs| secure_compare(signature_value, cs) }
 
+    puts "mushroombegin", key_id, key_secret, signature_value, calculated_signatures, "end"
+
     unless matching_signature
       raise Ey::Hmac::SignatureMismatch,
         "Calculated signature #{signature_value} does not match #{calculated_signatures.inspect} using #{canonicalize.inspect}"
